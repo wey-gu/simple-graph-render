@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Humble Graph Renderer</title>
+  <title>Humble Graph Renderer 🪄</title>
   <link rel="icon" href="https://www.siwei.io/images/avatar_wey.webp" type="image/x-icon" />
   <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
   <style type="text/css">
@@ -19,11 +19,13 @@
     h1 {
       text-align: center;
       margin-bottom: 20px;
+      font: 2em sans-serif;
     }
 
     #introduction {
       text-align: center;
       margin-bottom: 40px;
+      font: 1em helvetica;
     }
 
     #graph {
@@ -64,11 +66,19 @@
 
 <body>
   <div id="container">
-    <h1>Humble Graph Renderer</h1>
-    <p id="introduction">Render JSON format knowledge graph parsed from text with ChatGPT, inspired by GraphGPT.</p>
+    <h1>Humble Graph Renderer 🪄</h1>
+    <!-- add URL for GraphGPT -->
+    <p id="introduction">Render JSON graph extracted with ChatGPT, inspired by
+      <a href="https://github.com/varunshenoy/GraphGPT/" target="_blank">
+        GraphGPT
+      </a>
+      . See <a href="https://github.com/wey-gu/simple-graph-render" target="_blank">
+        here
+      </a> for more details.
+    </p>
     <div id="input-section">
       <textarea id="json-input"></textarea>
-      <button id="render-btn">Render Graph</button>
+      <button id="render-btn">Render Graph 🧚🏻</button>
     </div>
     <div id="graph"></div>
     <a href="https://github.com/wey-gu/simple-graph-render" target="_blank">
@@ -79,6 +89,147 @@
     const input = document.getElementById("json-input");
     const renderBtn = document.getElementById("render-btn");
     const container = document.getElementById("graph");
+
+    input.value = `{
+      "counter":8,
+      "graph":{
+          "nodes":[
+            {
+                "id":1,
+                "label":"J.K. Rowling",
+                "color":"#6096B4"
+            },
+            {
+                "id":2,
+                "label":"哈利波特",
+                "color":"#93BFCF"
+            },
+            {
+                "id":3,
+                "label":"魔法世界",
+                "color":"#BDCDD6"
+            },
+            {
+                "id":4,
+                "label":"霍格沃茨",
+                "color":"#EEE9DA"
+            },
+            {
+                "id":5,
+                "label":"英国",
+                "color":"#F0EEED"
+            },
+            {
+                "id":6,
+                "label":"霍格沃茨魔法学校",
+                "color":"#609EA2"
+            },
+            {
+                "id":7,
+                "label":"罗恩",
+                "color":"#C92C6D"
+            },
+            {
+                "id":8,
+                "label":"赫敏",
+                "color":"#EEE9DA"
+            },
+            {
+                "id":9,
+                "label":"金妮",
+                "color":"#6096B4"
+            },
+            {
+                "id":10,
+                "label":"多比",
+                "color":"#93BFCF"
+            },
+            {
+                "id":11,
+                "label":"纳威",
+                "color":"#BDCDD6"
+            },
+            {
+                "id":12,
+                "label":"死亡场",
+                "color":"#EEE9DA"
+            },
+            {
+                "id":13,
+                "label":"黑魔法师",
+                "color":"#F0EEED"
+            }
+          ],
+          "edges":[
+            {
+                "from":1,
+                "to":2,
+                "label":"作者"
+            },
+            {
+                "from":2,
+                "to":3,
+                "label":"生活在"
+            },
+            {
+                "from":2,
+                "to":4,
+                "label":"学习魔法在"
+            },
+            {
+                "from":4,
+                "to":5,
+                "label":"位于"
+            },
+            {
+                "from":4,
+                "to":6,
+                "label":"是"
+            },
+            {
+                "from":2,
+                "to":7,
+                "label":"结识"
+            },
+            {
+                "from":2,
+                "to":8,
+                "label":"结识"
+            },
+            {
+                "from":2,
+                "to":9,
+                "label":"结识"
+            },
+            {
+                "from":2,
+                "to":10,
+                "label":"结识"
+            },
+            {
+                "from":2,
+                "to":11,
+                "label":"结识"
+            },
+            {
+                "from":2,
+                "to":12,
+                "label":"参加战斗"
+            },
+            {
+                "from":2,
+                "to":13,
+                "label":"与战斗"
+            },
+            {
+                "from":12,
+                "to":2,
+                "label":"是哈利波特与黑魔法师伏地魔的最后一战"
+            }
+          ]
+      }
+    }
+    `;
 
     var options = {
       nodes: {
