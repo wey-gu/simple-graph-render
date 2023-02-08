@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Render Graph in JSON</title>
+  <link rel="icon" href="https://www.siwei.io/images/avatar_wey.webp" type="image/x-icon" />
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <style type="text/css">
+    #container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #graph {
+      border-radius: 5px;
+      width: 600px;
+      height: 500px;
+      border: 1px dashed lightgray;
+      margin: 20px;
+      background-color: #f0f8ff;
+    }
+
+    #input-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+    }
+
+    textarea {
+      border-radius: 5px;
+      width: 500px;
+      height: 440px;
+      border: 1px dashed lightgray;
+      margin-bottom: 20px;
+      background-color: #dcf5f2;
+    }
+
+    button {
+
+      background-color: #46515d;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="input-section">
+      <textarea id="json-input"></textarea>
+      <button id="render-btn">Render Graph</button>
+    </div>
+    <div id="graph"></div>
+  </div>
+  <script type="text/javascript">
+    const input = document.getElementById("json-input");
+    const renderBtn = document.getElementById("render-btn");
+    const container = document.getElementById("graph");
+
+    var options = {
+      nodes: {
+        shape: 'circle',
+        size: 20,
+        color: {
+          border: '#222222',
+          background: '#666666'
+        }
+      },
+      edges: {
+        width: 2,
+      },
+      physics: {
+        stabilization: false
+      }
+    };
+
+    renderBtn.addEventListener("click", function () {
+      try {
+        const json = JSON.parse(input.value);
+        const nodes = new vis.DataSet(json.graph.nodes);
+        const edges = new vis.DataSet(json.graph.edges);
+        const data = { nodes, edges };
+        const network = new vis.Network(container, data, {}, options);
+      } catch (error) {
+        alert("Invalid JSON format.");
+      }
+    });
+  </script>
+</body>
+
+</html>
